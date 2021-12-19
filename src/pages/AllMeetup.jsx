@@ -19,7 +19,6 @@ const AllMeetup = () => {
 
     const getMeetupServer = async () => {
       const data = await fetchMeetups();
-      console.log(data);
       const meetups = [];
 
       for (const key in data) {

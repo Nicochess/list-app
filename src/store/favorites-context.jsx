@@ -9,7 +9,10 @@ const FavoritesContext = createContext({
 })
 
 export const FavoritesContextProvider = ({ children }) => {
-    const [userFavorites, setUserFavorites] = useState([])
+    const [userFavorites, setUserFavorites] = useState(() => {
+        const dataLocal = JSON.parse(localStorage.getItem('favorites')) || []
+        return dataLocal
+    })
 
     const addFavoritesHandler = (favoriteMeetup) => {
         setUserFavorites((prevUserFavorites) => {
@@ -17,7 +20,7 @@ export const FavoritesContextProvider = ({ children }) => {
         })
     }
 
-    const removeFavoritesHandler = (meetupId) => {
+    const removeFavoritesHandler = (meetupId) => {  
         setUserFavorites((prevUserFavorites) => {
             return prevUserFavorites.filter(meetup => meetup.id !== meetupId)
         })
