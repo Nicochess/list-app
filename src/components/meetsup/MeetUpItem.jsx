@@ -23,6 +23,14 @@ const MeetUpItem = ({ address, title, id, image, description }) => {
     }
   };
 
+  const deleteFromServer = () => {
+    favoriteCtx.removeFavorites(id)
+
+    fetch(`https://list-app-f2951-default-rtdb.firebaseio.com/meetups/${id}.json`, {
+      method: 'DELETE'
+    })
+  }
+
   return (
     <Card>
       <div className={classes.item} id={id}>
@@ -36,6 +44,7 @@ const MeetUpItem = ({ address, title, id, image, description }) => {
         </div>
         <div className={classes.actions}>
           <button onClick={toggleFavoriteStatus}>{itemIsFavorite ? "Remove from Favorites" : "To Favorites"}</button>
+          <button onClick={deleteFromServer}>Delete Meetup</button>
         </div>
       </div>
     </Card>

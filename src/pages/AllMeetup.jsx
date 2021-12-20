@@ -15,8 +15,6 @@ const AllMeetup = () => {
   };
 
   useEffect(() => {
-    setIsLoading(true);
-
     const getMeetupServer = async () => {
       const data = await fetchMeetups();
       const meetups = [];
@@ -30,12 +28,12 @@ const AllMeetup = () => {
         meetups.push(meetup);
       }
 
-      setIsLoading(false);
       setDataShow(meetups);
+      setIsLoading(false);
     };
 
     getMeetupServer();
-  }, []);
+  }, [dataShow]);
 
   if (isLoading) {
     return (
